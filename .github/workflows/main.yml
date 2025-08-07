@@ -2,9 +2,7 @@ name: Verificar dependencias de voz
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches: ["main"]
 
 jobs:
   build:
@@ -14,13 +12,12 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v3
 
-      - name: Instalar Node.js
-        uses: actions/setup-node@v3
+      - name: Configurar Python
+        uses: actions/setup-python@v4
         with:
-          node-version: "18" # Puedes cambiar a otra versión si lo necesitas
+          python-version: "3.10"
 
       - name: Instalar dependencias
-        run: npm install
-
-      - name: Ejecutar pruebas
-        run: npm test
+        run: |
+          pip install --upgrade pip
+          pip install speechrecognition gtts playsound
